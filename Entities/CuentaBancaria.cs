@@ -19,21 +19,18 @@ namespace Entities
 
         public int Balance { get; set; }
 
+        public virtual List<Deposito> Detalle { get; set; }
+
 
         public CuentaBancaria()
         {
-            CuentaBancariaId = 0;
-            Fecha = DateTime.Now;
-            Nombre = string.Empty;
-            Balance = 0;
+            this.Detalle = new List<Deposito>();
         }
 
-        public CuentaBancaria(int cuentaBancariaId, DateTime fecha, string nombre, int balance)
+        public void AgregarDetalle(int DepositoId, DateTime Fecha, int CuentaId, string Concepto, int Monto)
         {
-            CuentaBancariaId = cuentaBancariaId;
-            Fecha = fecha;
-            Nombre = nombre;
-            Balance = balance;
+            this.Detalle.Add(new Deposito(DepositoId, Fecha, CuentaId, Concepto, Monto));
         }
+        
     }
 }
