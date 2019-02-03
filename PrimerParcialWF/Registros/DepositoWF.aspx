@@ -51,18 +51,18 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label2" runat="server" Text="Monto"></asp:Label>
                                     <asp:TextBox class="form-control" ID="montoTextBox" Text="0" runat="server"></asp:TextBox>
-                                    <asp:Button class="btn btn-warning btn-sm" ID="agregarButton" runat="server" Text="Agregar" />
+                                    <asp:Button class="btn btn-warning btn-sm" ID="agregarButton" runat="server" Text="Agregar" OnClick="agregarButton_Click" />
                                 </div>
                             </div>
                         </div>
-                        <asp:GridView ID="egresoGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#0066FF" GridLines="None">
+                        <asp:GridView ID="depositoGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#0066FF" GridLines="None">
                             <AlternatingRowStyle BackColor="#999999" />
                             <Columns>
-                                <asp:BoundField DataField="Id" HeaderText="Id" />
-                                <asp:BoundField DataField="EgresoId" HeaderText="EgresoId" />
-                                <asp:BoundField DataField="CategoriaId" HeaderText="CategoriaId" />
+                                <asp:BoundField DataField="DepositoId" HeaderText="Id" />
+                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                                <asp:BoundField DataField="CuentaId" HeaderText="Id de Cuenta" />
                                 <asp:BoundField DataField="Concepto" HeaderText="Concepto" />
-                                <asp:BoundField DataField="MontoEgresado" HeaderText="Monto Egresado" />
+                                <asp:BoundField DataField="Monto" HeaderText="Monto Depositado" />
                             </Columns>
                             <HeaderStyle BackColor="#003366" Font-Bold="True" />
                         </asp:GridView>

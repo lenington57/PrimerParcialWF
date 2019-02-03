@@ -13,7 +13,7 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label3" runat="server" Text="Id"></asp:Label>
-                                    <asp:Button class="btn btn-info btn-sm" ID="buscarButton" runat="server" Text="Buscar"/>
+                                    <asp:Button class="btn btn-info btn-sm" ID="buscarButton" runat="server" Text="Buscar" OnClick="buscarButton_Click"/>
                                     <asp:TextBox class="form-control" ID="cuentaBancariaIdTextBox" type="number" Text="0" runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -50,9 +50,9 @@
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
-                                    <asp:Button Text="Nuevo" class="btn btn-primary btn-sm" runat="server" ID="nuevoButton"/>
-                                    <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ID="guadarButton"/>
-                                    <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" runat="server" ID="eliminarButton"/>
+                                    <asp:Button Text="Nuevo" class="btn btn-primary btn-sm" runat="server" ID="nuevoButton" OnClick="nuevoButton_Click"/>
+                                    <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ID="guadarButton" OnClick="guadarButton_Click"/>
+                                    <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" runat="server" ID="eliminarButton" OnClick="eliminarButton_Click"/>
                                 </div>
                             </div>
                         </div>
@@ -63,5 +63,6 @@
             <!-- card.// -->
             <br>
     </div>
+</div>
     </div>
 </asp:Content>
