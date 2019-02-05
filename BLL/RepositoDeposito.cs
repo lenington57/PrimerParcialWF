@@ -53,27 +53,18 @@ namespace BLL
             return paso;
         }
 
-        public override Deposito Buscar(int id)
+        public static void CambiarBalances(Deposito deposito, Deposito depositoAnt)
         {
-            Deposito deposito = new Deposito();
-            try
-            {
-                CuentaBancaria cuenta = new CuentaBancaria();
-                deposito = _contexto.Deposito.Find(id);
-                cuenta.Detalle.Count();
+            Repositorio<CuentaBancaria> repositorio = new Repositorio<CuentaBancaria>();
+            Repositorio<CuentaBancaria> repository = new Repositorio<CuentaBancaria>();
+            Contexto contexto = new Contexto();
+            var Cuenta = contexto.CuentaBancaria.Find(deposito.CuentaId);
+            var CuentaAnt = contexto.CuentaBancaria.Find(depositoAnt.CuentaId);
 
-                foreach (var item in cuenta.Detalle)
-                {
-                    string s = item.CuentaBancaria.Nombre;
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            return deposito;
+            Cuenta.Balance += deposito.Monto;
+            CuentaAnt.Balance -= depositoAnt.Monto;
+            repositorio.Modificar(Cuenta);
+            repository.Modificar(CuentaAnt);
         }
 
         public override bool Modificar(Deposito deposito)
@@ -82,22 +73,21 @@ namespace BLL
             Contexto contexto = new Contexto();
             try
             {
-                contexto.Entry(deposito).State = EntityState.Modified;
-
                 Deposito DepAnt = contexto.Deposito.Find(deposito.DepositoId);
+
                 var cuenta = contexto.CuentaBancaria.Find(deposito.CuentaId);
-                var cuentaAnt = contexto.CuentaBancaria.Find(DepAnt.CuentaId);
 
                 if (deposito.CuentaId != DepAnt.CuentaId)
                 {
-                    cuenta.Balance += deposito.Monto;
-                    cuentaAnt.Balance -= DepAnt.Monto;
+                    CambiarBalances(deposito, DepAnt);
                 }
                 else
                 {
                     int diferencia = deposito.Monto - DepAnt.Monto;
                     cuenta.Balance += diferencia;
                 }
+                contexto = new Contexto();
+                contexto.Entry(deposito).State = EntityState.Modified;
 
                 contexto.SaveChanges();
                 paso = true;

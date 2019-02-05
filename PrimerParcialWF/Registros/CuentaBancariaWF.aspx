@@ -6,7 +6,7 @@
     <div class="form-row justify-content-center">
         <aside class="col-sm-6">
             <div class="card">
-                <div class="card-header text-uppercase text-center text-primary">Cuenta Bancaria</div>
+                <div class="card-header text-uppercase text-center">Cuenta Bancaria</div>
                 <article class="card-body">
                     <form>
                         <div class="col-md-6 col-md-offset-3">
@@ -50,7 +50,7 @@
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
-                                    <asp:Button Text="Nuevo" class="btn btn-primary btn-sm" runat="server" ID="nuevoButton" OnClick="nuevoButton_Click"/>
+                                    <asp:Button Text="Nuevo" class="btn btn-dark btn-sm" runat="server" ID="nuevoButton" OnClick="nuevoButton_Click"/>
                                     <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ID="guadarButton" OnClick="guadarButton_Click"/>
                                     <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" runat="server" ID="eliminarButton" OnClick="eliminarButton_Click"/>
                                 </div>

@@ -72,23 +72,22 @@ namespace PrimerParcialWF.Registros
             if (cuenta.CuentaBancariaId == 0)
             {
                 paso = repositorio.Guardar(cuenta);
-                Response.Write("<script>alert('Guardado');</script>");
+                Utils.ShowToastr(this, "Guardado", "Exito", "success");
                 Limpiar();
             }
             else
             {
-                CuentaBancaria user = new CuentaBancaria();
                 int id = Utils.ToInt(cuentaBancariaIdTextBox.Text);
                 BLL.Repositorio<CuentaBancaria> repository = new BLL.Repositorio<CuentaBancaria>();
                 cuenta = repository.Buscar(id);
 
-                if (user != null)
+                if (cuenta != null)
                 {
                     paso = repositorio.Modificar(LlenaClase());
-                    Response.Write("<script>alert('Modificado');</script>");
+                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
                 }
                 else
-                    Response.Write("<script>alert('Id no existe');</script>");
+                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
             }
 
             if (paso)
@@ -96,7 +95,7 @@ namespace PrimerParcialWF.Registros
                 Limpiar();
             }
             else
-                Response.Write("<script>alert('No se pudo guardar');</script>");
+                Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
         }
 
         protected void eliminarButton_Click(object sender, EventArgs e)
@@ -110,14 +109,14 @@ namespace PrimerParcialWF.Registros
             {
                 if (repositorio.Eliminar(id))
                 {
-                    Response.Write("<script>alert('Eliminado');</script>");
+                    Utils.ShowToastr(this, "Eliminado", "Exito", "success");
                     Limpiar();
                 }
                 else
-                    Response.Write("<script>alert('No se pudo eliminar');</script>");
+                    Utils.ShowToastr(this, "No se pudo eliminar", "Error", "error");
             }
             else
-                Response.Write("<script>alert('No existe');</script>");
+                Utils.ShowToastr(this, "No existe", "Error", "error");
         }
 
     }

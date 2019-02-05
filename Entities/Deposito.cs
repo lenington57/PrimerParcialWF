@@ -23,9 +23,6 @@ namespace Entities
 
         public int Monto { get; set; }
 
-        [ForeignKey("CunetaId")]
-        public virtual CuentaBancaria CuentaBancaria { get; set; }
-
 
         public Deposito()
         {

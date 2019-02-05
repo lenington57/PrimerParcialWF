@@ -34,23 +34,15 @@ namespace PrimerParcialWF.Registros
             cuentaDropDownList.Items.Insert(0, new ListItem("", ""));
         }
 
-        protected void BindGrid()
-        {
-            depositoGridView.DataSource = ((Deposito)ViewState["Deposito"]).CuentaBancaria.Detalle;
-            depositoGridView.DataBind();
-        }
-
         public Deposito LlenarClase()
         {
-            Deposito deposito = new Deposito();
-
-            deposito = (Deposito)ViewState["Deposito"];
+            Deposito deposito = new Deposito();            
 
             deposito.DepositoId = Utils.ToInt(depositoIdTextBox.Text);
             deposito.Fecha = Utils.ToDateTime(fechaTextBox.Text).Date;
             deposito.CuentaId = Utils.ToInt(cuentaDropDownList.SelectedValue);
             deposito.Concepto = conceptoTextBox.Text;
-            deposito.Monto = Utils.ToInt(totalTextBox.Text);
+            deposito.Monto = Utils.ToInt(montoTextBox.Text);
 
             return deposito;
         }
@@ -60,10 +52,8 @@ namespace PrimerParcialWF.Registros
             depositoIdTextBox.Text = "0";
             fechaTextBox.Text = DateTime.Now.ToString("yyyy-MM-dd");
             cuentaDropDownList.SelectedIndex = 0;
+            conceptoTextBox.Text = "";
             montoTextBox.Text = "0";
-            totalTextBox.Text = "0";
-            ViewState["Deposito"] = new Deposito();
-            this.BindGrid();
         }
 
         public void LlenarCampos(Deposito deposito)
@@ -72,39 +62,88 @@ namespace PrimerParcialWF.Registros
             depositoIdTextBox.Text = deposito.DepositoId.ToString();
             fechaTextBox.Text = deposito.Fecha.ToString("yyyy-MM-dd");
             cuentaDropDownList.SelectedIndex = deposito.CuentaId;
+            conceptoTextBox.Text = deposito.Concepto;
             montoTextBox.Text = deposito.Monto.ToString();
-            this.BindGrid();
-            totalTextBox.Text = deposito.Monto.ToString();
         }
 
-        private void LlenarValores()
+        protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            List<Deposito> detalle = new List<Deposito>();
+            RepositoDeposito repositorio = new RepositoDeposito();
 
-            if (depositoGridView.DataSource != null)
+            var deposito = repositorio.Buscar(Utilitarios.Utils.ToInt(depositoIdTextBox.Text));
+            if (deposito != null)
             {
-                detalle = (List<Deposito>)depositoGridView.DataSource;
+                LlenarCampos(deposito);
+                Utils.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
             }
-            double Total = 0;
-            foreach (var item in detalle)
+            else
             {
-                Total += item.Monto;
+                Limpiar();
+                Utils.ShowToastr(this, "No Hay Resultado", "Error", "error");
             }
-            totalTextBox.Text = Total.ToString();
         }
 
-        protected void agregarButton_Click(object sender, EventArgs e)
+        protected void nuevoButton_Click(object sender, EventArgs e)
         {
-            //Deposito deposito = new Deposito();
+            Limpiar();
+        }
 
-            //deposito = (Deposito)ViewState["Deposito"];
-            //deposito.AgregarDetalle(0, egreso.EgresoId,
-            //        ToInt(categoriaDropDownList.SelectedValue), conceptoTextBox.Text, ToInt(montoTextBox.Text));
+        protected void guadarButton_Click(object sender, EventArgs e)
+        {
+            bool paso = false;
+            RepositoDeposito repositorio = new RepositoDeposito();
+            Deposito deposito = new Deposito();
 
-            //ViewState["Deposito"] = cuen;
+            deposito = LlenarClase();
 
-            //this.BindGrid();
-            //LlenarValores();
+            if (deposito.DepositoId == 0)
+            {
+                paso = repositorio.Guardar(deposito);
+                Utils.ShowToastr(this, "Guardado", "Exito", "success");
+                Limpiar();
+            }
+            else
+            {
+                RepositoDeposito repository = new RepositoDeposito();
+                int id = Utils.ToInt(depositoIdTextBox.Text);
+                deposito = repository.Buscar(id);
+
+                if (deposito != null)
+                {
+                    paso = repository.Modificar(LlenarClase());
+                    Utils.ShowToastr(this, "Modificado", "Exito", "success");
+                }
+                else
+                    Utils.ShowToastr(this, "Id no existe", "Error", "error");
+            }
+
+            if (paso)
+            {
+                Limpiar();
+            }
+            else
+                Utils.ShowToastr(this, "No se pudo guardar", "Error", "error");
+        }
+
+        protected void eliminarButton_Click(object sender, EventArgs e)
+        {
+            RepositoDeposito repositorio = new RepositoDeposito();
+            int id = Utils.ToInt(depositoIdTextBox.Text);
+
+            var deposito = repositorio.Buscar(id);
+
+            if (deposito != null)
+            {
+                if (repositorio.Eliminar(id))
+                {
+                    Utils.ShowToastr(this, "Eliminado", "Exito", "success");
+                    Limpiar();
+                }
+                else
+                    Utils.ShowToastr(this, "No se pudo eliminar", "Error", "error");
+            }
+            else
+                Utils.ShowToastr(this, "No existe", "Error", "error");
         }
     }
 }

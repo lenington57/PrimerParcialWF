@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Entities
 {
-    [Serializable]
     public class CuentaBancaria
     {
         [Key]
@@ -19,17 +18,21 @@ namespace Entities
 
         public int Balance { get; set; }
 
-        public virtual List<Deposito> Detalle { get; set; }
-
 
         public CuentaBancaria()
         {
-            this.Detalle = new List<Deposito>();
+            CuentaBancariaId = 0;
+            Fecha = DateTime.Now;
+            Nombre = string.Empty;
+            Balance = 0;
         }
 
-        public void AgregarDetalle(int DepositoId, DateTime Fecha, int CuentaId, string Concepto, int Monto)
+        public void AgregarDetalle(int cuentaBancariaId, DateTime fecha, string nombre, int balance)
         {
-            this.Detalle.Add(new Deposito(DepositoId, Fecha, CuentaId, Concepto, Monto));
+            CuentaBancariaId = cuentaBancariaId;
+            Fecha = fecha;
+            Nombre = nombre;
+            Balance = balance;
         }
         
     }
