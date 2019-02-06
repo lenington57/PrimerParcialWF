@@ -15,7 +15,9 @@
                                 <div class="form-group">
                                     <asp:Label ID="Label3" runat="server" Text="Id"></asp:Label>
                                     <asp:Button class="btn btn-info btn-sm" ID="BuscarButton" runat="server" Text="Buscar" OnClick="BuscarButton_Click" />
-                                    <asp:TextBox class="form-control" ID="depositoIdTextBox" Text="0" runat="server"></asp:TextBox>
+                                    <asp:TextBox class="form-control" ID="depositoIdTextBox" type="number" Text="0" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="IdRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="depositoIdTextBox" Display="Dynamic" ForeColor="Red" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="IdREV" runat="server" ErrorMessage="Solo Números" ValidationExpression="^[0-9]*$" ControlToValidate="depositoIdTextBox" ForeColor="Red" ValidationGroup="Guardar">Solo Números</asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -28,6 +30,7 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="col-md-6 col-md-offset-3">
                             <div class="container">
                                 <div class="form-group">
@@ -37,12 +40,15 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <!-- form-group// -->
                         <div class="col-md-6 col-md-offset-3">
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label4" runat="server" Text="Concepto"></asp:Label>
                                     <asp:TextBox class="form-control" ID="conceptoTextBox" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="conceptoRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="conceptoTextBox" Display="Dynamic" ForeColor="Red" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="conceptoREV" runat="server" ErrorMessage="Solo Letras" ControlToValidate="conceptoTextBox" ForeColor="Red" ValidationExpression="^[a-z &amp; A-Z]*$" ValidationGroup="Guardar">Solo Letras</asp:RegularExpressionValidator>
                                 </div>
                             </div>
                         </div>
@@ -50,17 +56,19 @@
                             <div class="container">
                                 <div class="form-group">
                                     <asp:Label ID="Label2" runat="server" Text="Monto"></asp:Label>
-                                    <asp:TextBox class="form-control" ID="montoTextBox" Text="0" runat="server"></asp:TextBox>
-                                   </div>
+                                    <asp:TextBox class="form-control" ID="montoTextBox" type="number" Text="0" runat="server"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="montoRFV" runat="server" ErrorMessage="No puede estar vacío" ControlToValidate="montoTextBox" ForeColor="Red" ValidationGroup="Guardar">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator ID="montoREV" runat="server" ErrorMessage="Solo Números" ValidationExpression="^[0-9]*$" ControlToValidate="montoTextBox" ForeColor="Red" ValidationGroup="Guardar">Solo Números</asp:RegularExpressionValidator>
+                                </div>
                             </div>
                         </div>
-                        <!-- form-group// -->
+                        <asp:ValidationSummary ID="DepositoVS" runat="server" />
                         <!-- form-group// -->
                         <div class="panel-footer">
                             <div class="text-center">
                                 <div class="form-group" style="display: inline-block">
                                     <asp:Button Text="Nuevo" class="btn btn-dark btn-sm" runat="server" ID="nuevoButton" OnClick="nuevoButton_Click" />
-                                    <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ID="guadarButton" OnClick="guadarButton_Click" />
+                                    <asp:Button Text="Guardar" class="btn btn-success btn-sm" runat="server" ID="guadarButton" OnClick="guadarButton_Click" ValidationGroup="Guardar" />
                                     <asp:Button Text="Eliminar" class="btn btn-danger btn-sm" runat="server" ID="eliminarButton" OnClick="eliminarButton_Click" />
                                 </div>
                             </div>
@@ -70,5 +78,11 @@
                 </article>
             </div>
             <!-- card.// -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 </asp:Content>

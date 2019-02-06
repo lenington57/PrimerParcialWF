@@ -13,7 +13,7 @@
                     <asp:DropDownList ID="FiltroDropDownList" CssClass="form-control" runat="server">
                         <asp:ListItem>Todo</asp:ListItem>
                         <asp:ListItem>Todo por Fecha</asp:ListItem>
-                        <asp:ListItem>Id de la Depósito</asp:ListItem>
+                        <asp:ListItem>Id de la Cuenta</asp:ListItem>
                         <asp:ListItem>Nombre</asp:ListItem>
                     </asp:DropDownList>
                 </div>

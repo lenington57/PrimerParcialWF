@@ -48,10 +48,11 @@ namespace PrimerParcialWF.Registros
                 fechaTextBox.Text = cuenta.Fecha.ToString();
                 nombreTextBox.Text = cuenta.Nombre;
                 balanceTextBox.Text = cuenta.Balance.ToString();
+                Utils.ShowToastr(this, "Busqueda exitosa", "Exito", "success");
             }
             else
             {
-                Response.Write("<script>alert('No se encuentra');</script>");
+                Utils.ShowToastr(this, "No Hay Resultado", "Error", "error");
             }
         }
 
