@@ -68,7 +68,6 @@
                             <span class="fas fa-print"></span>
                             Imprimir
                         </asp:LinkButton>
-
                     </div>
                 </div>
             </div>

@@ -34,28 +34,29 @@
                 <div class="form-group col-md-2">
                     <asp:Label Text="Desde" runat="server" />
                     <asp:TextBox ID="DesdeTextBox" class="form-control input-group" TextMode="Date" runat="server" />
-
                 </div>
-
                 <div class="form-group col-md-2">
                     <asp:Label Text="Hasta" runat="server" />
                     <asp:TextBox ID="HastaTextBox" class="form-control input-group" TextMode="Date" runat="server" />
                 </div>
             </div>
-            <div class="form-row justify-content-center">
-                <asp:GridView ID="UsuarioGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
-                    <AlternatingRowStyle BackColor="LightSkyBlue" />
-                    <Columns>
-                        <asp:BoundField DataField="CuentaBancariaId" HeaderText="Id de Cuenta" />
-                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                        <asp:BoundField DataField="Balance" HeaderText="Balance" />
-                    </Columns>
-                    <HeaderStyle BackColor="LightGreen" Font-Bold="True" />
-                </asp:GridView>
+            <div class="card">
+                <div class="card-body">
+                    <asp:Label ID="criterioLabel" runat="server" Text="" Font-Bold="True" ValidateRequestMode="Inherit" Font-Size="Large"></asp:Label>
+                    <div class="form-row justify-content-center">
+                        <asp:GridView ID="UsuarioGridView" runat="server" class="table table-condensed table-bordered table-responsive" AutoGenerateColumns="False" CellPadding="4" ForeColor="#333333" GridLines="None">
+                            <AlternatingRowStyle BackColor="LightSkyBlue" />
+                            <Columns>
+                                <asp:BoundField DataField="CuentaBancariaId" HeaderText="Id de Cuenta" />
+                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                                <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                <asp:BoundField DataField="Balance" HeaderText="Balance" />
+                            </Columns>
+                            <HeaderStyle BackColor="LightGreen" Font-Bold="True" />
+                        </asp:GridView>
+                    </div>
+                </div>
             </div>
-
-
             <%--Botones--%>
             <div class="card-footer">
                 <div class="justify-content-start">
@@ -64,7 +65,6 @@
                             <span class="fas fa-print"></span>
                             Imprimir
                         </asp:LinkButton>
-
                     </div>
                 </div>
             </div>

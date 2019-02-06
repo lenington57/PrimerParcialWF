@@ -35,6 +35,8 @@ namespace PrimerParcialWF.Consultas
             DateTime hasta = Utils.ToDateTime(HastaTextBox.Text);
             UsuarioGridView.DataSource = BLL.Metodos.FiltrarCuentas(index, CriterioTextBox.Text, desde, hasta);
             UsuarioGridView.DataBind();
+
+            criterioLabel.Text = FiltroDropDownList.Text.ToString();
         }
     }
 }
