@@ -20,7 +20,6 @@ namespace PrimerParcialWF.Registros
             if (!Page.IsPostBack)
             {
                 LlenarCombo();
-                ViewState["Deposito"] = new Deposito();
             }
         }
 
